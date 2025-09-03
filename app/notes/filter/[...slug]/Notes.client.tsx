@@ -1,6 +1,6 @@
 'use client';
 
-import NoteForm from '@/components/NoteForm/NoteForm';
+// import NoteForm from '@/components/NoteForm/NoteForm';
 import NoteList from '@/components/NoteList/NoteList';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBox from '@/components/SearchBox/SearchBox';
@@ -11,7 +11,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { BeatLoader } from 'react-spinners';
 import { useDebouncedCallback } from 'use-debounce';
 import css from './NotesClient.module.css';
-import Modal from '@/components/Modal/Modal';
+// import Modal from '@/components/Modal/Modal';
+import Link from 'next/link';
 
 interface NotesClientProps {
   tag: string | undefined;
@@ -20,7 +21,7 @@ interface NotesClientProps {
 export const NotesClient = ({ tag }: NotesClientProps) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [noteQuery, setNoteQuery] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data, isLoading, isSuccess, isError } = useQuery<noteHttpResponse>({
     queryKey: ['notes', currentPage, noteQuery, tag],
@@ -41,13 +42,13 @@ export const NotesClient = ({ tag }: NotesClientProps) => {
     }
   }, [data, isSuccess]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
   const handleSearchQueryChange = useDebouncedCallback((query: string) => {
     setNoteQuery(query);
@@ -69,17 +70,17 @@ export const NotesClient = ({ tag }: NotesClientProps) => {
           />
         )}
 
-        <button onClick={openModal} className={css.button}>
+        <Link href={'/notes/action/create'} className={css.button}>
           Create note +
-        </button>
+        </Link>
       </section>
       {isLoading && <BeatLoader color="#0d6efd" size={20} />}
 
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <Modal closeModal={closeModal}>
           <NoteForm closeModal={closeModal} />
         </Modal>
-      )}
+      )} */}
 
       {data && data.notes.length > 0 && <NoteList data={data.notes} />}
       <Toaster />

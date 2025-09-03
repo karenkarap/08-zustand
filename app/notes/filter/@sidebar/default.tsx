@@ -5,15 +5,17 @@ const tagsList: string[] = ['All', 'Todo', 'Work', 'Personal', 'Meeting', 'Shopp
 
 const Sidebar = async () => {
   return (
-    <ul className={css.menuList}>
-      {tagsList.map((tag) => (
-        <li className={css.menuItem} key={tag}>
-          <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
-            {tag}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul className={css.menuList}>
+        {tagsList.map((tag) => (
+          <li className={css.menuItem} key={tag}>
+            <Link href={`/notes/filter/${tag}`} className={css.menuLink}>
+              {tag}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 
