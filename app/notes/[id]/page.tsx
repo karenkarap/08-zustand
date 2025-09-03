@@ -1,12 +1,13 @@
 import { fetchNoteById } from '@/lib/api';
 import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import NoteDetailsClient from './NoteDetails.client';
+import { Metadata } from 'next';
 
 interface NoteDetailsProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params }: NoteDetailsProps) {
+export async function generateMetadata({ params }: NoteDetailsProps): Promise<Metadata> {
   const { id } = await params;
   const note = await fetchNoteById(id);
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: NoteDetailsProps) {
     openGraph: {
       title: `Note ${note.title}`,
       description: note.content.slice(0, 30),
-      url: `https://07-routing-nextjs-gtgrhbyik-kars-projects-50dfc61a.vercel.app/notes/${id}`,
+      url: `https://08-zustand-tau-eight.vercel.app/notes/${id}`,
       images: [
         {
           url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
