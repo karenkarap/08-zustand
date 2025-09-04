@@ -2,7 +2,7 @@
 
 import css from './NoteForm.module.css';
 import type { CreatedNote, NoteTag } from '../../types/note';
-import { QueryClient, useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { createNote } from '@/lib/api';
 import { useRouter } from 'next/navigation';
@@ -17,7 +17,7 @@ interface NoteFormValues {
 function NoteForm() {
   const router = useRouter();
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: (value: NoteFormValues) => createNote(value),
